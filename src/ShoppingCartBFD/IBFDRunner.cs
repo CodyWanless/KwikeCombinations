@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using Skunkworks.Constraints.Interfaces;
 using Skunkworks.Model.Interfaces;
 
-namespace ShoppingCartBFD
+namespace Skunkworks
 {
     public interface IBFDRunner
     {
