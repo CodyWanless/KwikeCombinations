@@ -28,7 +28,7 @@ namespace Skunkworks
             }
 
             var repoFactory = new RepositoryFactory();
-            var repo = repoFactory.GetRepository<IItem>();
+            var repo = repoFactory.GetRepository(AlgorithmType.BestFitDecreasing);
 
             var result = new
             {

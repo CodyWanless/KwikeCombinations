@@ -5,19 +5,21 @@ using Skunkworks.Model.Interfaces;
 
 namespace Skunkworks.Werk
 {
-    public sealed class ItemRepository : IRepository<IItem>
+    public sealed class BFDItemRepository : IItemRepository
     {
         private readonly IServiceClient serviceClient;
         private readonly string bfdUrl;
 
-        public ItemRepository()
+        public BFDItemRepository()
             : this(HttpServiceClient.Instance) { } // #BastardInjectionSaturday
 
-        public ItemRepository(IServiceClient serviceClient)
+        public BFDItemRepository(IServiceClient serviceClient)
         {
             this.serviceClient = serviceClient;
             this.bfdUrl = System.Environment.GetEnvironmentVariable("BFD_URI");
         }
+
+        public AlgorithmType AlgorithmType { get; } = AlgorithmType.BestFitDecreasing;
 
         public Task ScheduleWork(IReadOnlyCollection<IItem> workItems)
         {

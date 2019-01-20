@@ -1,27 +1,30 @@
 using System;
+using System.Collections.Generic;
 using Skunkworks.Model.Interfaces;
 
 namespace Skunkworks.Werk
 {
     public sealed class RepositoryFactory : IRepositoryFactory
     {
-        private readonly IRepository<IItem> itemRepository;
+        private readonly IReadOnlyDictionary<AlgorithmType, IItemRepository> repositories;
 
         public RepositoryFactory()
         {
-            this.itemRepository = new ItemRepository();
+            this.repositories = new Dictionary<AlgorithmType, IItemRepository>
+            {
+                { AlgorithmType.BestFitDecreasing, new BFDItemRepository() }
+            };
         }
 
-        public IRepository<T> GetRepository<T>()
+        public IItemRepository GetRepository(AlgorithmType algorithmType)
         {
-            var typeOfT = typeof(T);
             // and kids, this is why we use a DI framework
-            if (typeOfT.IsAssignableFrom(typeof(IItem)))
+            if (repositories.TryGetValue(algorithmType, out var repository))
             {
-                return itemRepository as IRepository<T>;
+                return repository;
             }
 
-            throw new InvalidOperationException($"Repository not found for type {typeOfT}");
+            throw new InvalidOperationException($"Repository not found for type {algorithmType}");
         }
     }
 }

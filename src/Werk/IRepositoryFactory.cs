@@ -4,6 +4,6 @@ namespace Skunkworks.Werk
 {
     public interface IRepositoryFactory
     {
-        IRepository<T> GetRepository<T>();
+        IItemRepository GetRepository(AlgorithmType algorithmType);
     }
 }
