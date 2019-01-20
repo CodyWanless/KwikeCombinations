@@ -22,11 +22,9 @@ namespace Skunkworks
 
             // preferably done via a handler foreach algorithm type
             if (req.AlgorithmType == AlgorithmType.Done)
-            { 
+            {
                 Console.WriteLine("Quitting.");
-                // throw new Exception("I'm done and have no clue what to do");
                 return Task.FromResult<string>(null);
-                
             }
 
             var repoFactory = new RepositoryFactory();
@@ -38,7 +36,7 @@ namespace Skunkworks
                 NextStepType = AlgorithmType.Done,
                 Output = "Arbitrary Done Message"
             };
-            var resultString = JsonConvert.SerializeObject(result);              
+            var resultString = JsonConvert.SerializeObject(result);
 
             return Task.FromResult(resultString);
         }
