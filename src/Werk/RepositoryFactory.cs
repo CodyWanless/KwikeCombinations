@@ -18,7 +18,6 @@ namespace Skunkworks.Werk
 
         public IItemRepository GetRepository(AlgorithmType algorithmType)
         {
-            // and kids, this is why we use a DI framework
             if (repositories.TryGetValue(algorithmType, out var repository))
             {
                 return repository;

@@ -24,7 +24,9 @@ namespace Skunkworks
             if (req.AlgorithmType == AlgorithmType.Done)
             { 
                 Console.WriteLine("Quitting.");
-                throw new Exception("I'm done and have no clue what to do");
+                // throw new Exception("I'm done and have no clue what to do");
+                return Task.FromResult<string>(null);
+                
             }
 
             var repoFactory = new RepositoryFactory();
